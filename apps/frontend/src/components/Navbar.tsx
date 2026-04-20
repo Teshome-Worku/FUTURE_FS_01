@@ -11,6 +11,8 @@ const navLinks = [
     { name: "Contact", href: "#contact" },
 ];
 
+const hireMeHref = "https://wa.me/251955800626";
+
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileOpen, setMobileOpen] = useState(false);
@@ -93,10 +95,11 @@ export default function Navbar() {
                 <div className="flex items-center gap-4">
                     {/* Hire Me Button */}
                     <Link
-                        href="#contact"
+                        href={hireMeHref}
                         id="navbar-hire-me"
-                        onClick={() => setActiveLink("#contact")}
-                        className="hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg
+                        title="Whatsapp"
+                        // onClick={() => setActiveLink("#contact")}
+                        className="group hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg
               bg-emerald-500 text-[#0a0f0d]
               hover:bg-emerald-400 hover:shadow-[0_0_24px_rgba(52,211,153,0.35)]
               active:scale-[0.97]
@@ -122,6 +125,8 @@ export default function Navbar() {
                     <button
                         id="navbar-mobile-toggle"
                         aria-label="Toggle mobile menu"
+                        aria-controls="navbar-mobile-menu"
+                        aria-expanded={mobileOpen}
                         onClick={() => setMobileOpen((prev) => !prev)}
                         className="md:hidden relative w-10 h-10 flex items-center justify-center rounded-lg text-gray-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-all duration-300"
                     >
@@ -173,7 +178,7 @@ export default function Navbar() {
 
                     {/* Mobile Hire Me */}
                     <Link
-                        href="#contact"
+                        href={hireMeHref}
                         id="mobile-navbar-hire-me"
                         onClick={() => {
                             setActiveLink("#contact");
