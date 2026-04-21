@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import heroDeveloper from "@/assets/hero-developer.png"
 
 export default function Hero() {
     return (
@@ -51,14 +52,14 @@ export default function Hero() {
                     <div className="relative group">
                         {/* Soft background glow */}
                         <div className="absolute -inset-4 bg-emerald-500/20 blur-[60px] opacity-70 group-hover:opacity-100 transition-opacity duration-700 rounded-[3rem]" />
-                        
+
                         {/* Image Container */}
                         <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-[420px] lg:h-[420px] rounded-3xl overflow-hidden bg-gray-900/40 backdrop-blur-sm border border-white/5 shadow-2xl transition-transform duration-700 group-hover:-translate-y-2 group-hover:rotate-1">
                             {/* Inner gradient overlay for better blending */}
                             <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0f0d]/40 via-transparent to-transparent z-10 pointer-events-none" />
-                            
+
                             <Image
-                                src="/hero-developer.png"
+                                src={heroDeveloper}
                                 alt="Abstract Developer Illustration"
                                 fill
                                 sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 420px"
