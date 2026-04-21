@@ -15,9 +15,6 @@ export default function Home() {
       <Skills />
       <Contact />
       <Footer />
-
-
-
     </div>
 
 
