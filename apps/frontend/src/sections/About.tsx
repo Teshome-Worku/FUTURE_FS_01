@@ -2,19 +2,15 @@ import Image from "next/image";
 import aboutImage from "@/assets/profile.jpg"
 
 export default function About() {
-    const skills = [
-        "Next.js", "React", "Node.js", "TypeScript", "Tailwind CSS", "MongoDB"
-    ];
-
     return (
-        <section className="bg-black text-white px-6 py-24 relative overflow-hidden" id="about">
+        <section className="bg-[#0a0f0d] text-white px-6 py-24 relative overflow-hidden" id="about">
             {/* Background Decorations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
                 <div className="absolute -top-1/4 -right-1/4 w-96 h-96 bg-green-500/10 blur-[120px] rounded-full mix-blend-screen"></div>
                 <div className="absolute bottom-0 -left-1/4 w-80 h-80 bg-emerald-500/10 blur-[100px] rounded-full mix-blend-screen"></div>
             </div>
 
-            <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-20 items-center relative z-10">
+            <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-12 items-center relative z-10">
 
                 {/* LEFT - IMAGE */}
                 <div className="flex justify-center relative group">
@@ -22,11 +18,11 @@ export default function About() {
                         {/* Interactive Glow Behind Image */}
                         <div className="absolute -inset-2 bg-linear-to-tr from-green-500 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
 
-                        <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl transition-transform duration-700 group-hover:-translate-y-2">
+                        <div className="relative rounded-2xl overflow-hidden border border-white/5 bg-zinc-900 shadow-2xl transition-transform duration-700 group-hover:-translate-y-2">
                             <Image
                                 src={aboutImage}
                                 alt="About me"
-                                className="relative w-80 sm:w-96 h-104 sm:h-120 object-cover object-top grayscale-15 group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                className="relative w-80 sm:w-96 h-[416px] sm:h-[480px] object-cover object-top grayscale-15 group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
                             />
                         </div>
 
@@ -55,13 +51,17 @@ export default function About() {
                             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                             <span className="text-gray-300 text-xs font-medium uppercase tracking-wider">Discover More</span>
                         </div>
-                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mt-4">
-                            About <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-300">Me</span>
-                        </h2>
+                        <div className="flex justify-center">
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mt-4">
+                                About <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-300">Me</span>
+                            </h2>
+
+                        </div>
+
                     </div>
 
                     {/* Text content with improved typography */}
-                    <div className="space-y-5 text-gray-400 leading-relaxed text-lg font-light">
+                    <div className="space-y-5 text-gray-400 leading-relaxed text-lg font-light max-w-lg">
                         <p className="text-gray-200 font-medium text-xl leading-snug">
                             I’m a Full Stack Developer focused on building modern, scalable web applications that solve real-world problems.
                         </p>
@@ -75,18 +75,26 @@ export default function About() {
                         </p>
                     </div>
 
-                    {/* Skill Tags */}
-                    <div className="pt-6 border-t border-white/10">
-                        <p className="text-sm font-semibold text-white mb-5 uppercase tracking-widest text-opacity-80">Core Arsenal</p>
-                        <div className="flex flex-wrap gap-3">
-                            {skills.map((skill) => (
-                                <span
-                                    key={skill}
-                                    className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-sm font-medium text-gray-300 hover:text-green-400 hover:border-green-400/50 hover:bg-green-400/10 hover:shadow-[0_0_15px_rgba(74,222,128,0.15)] transition-all duration-300 cursor-default"
-                                >
-                                    {skill}
-                                </span>
-                            ))}
+                    {/* Highlights Section */}
+                    <div className="pt-8 border-t border-white/5 max-w-lg">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            {/* Highlight 1 */}
+                            <div className="bg-gray-900/50 p-4 rounded-xl border border-white/5 hover:bg-gray-800 hover:border-gray-700 transition-colors duration-300">
+                                <p className="text-lg font-semibold text-white">1+ Years</p>
+                                <p className="text-xs text-gray-400 mt-1">Experience</p>
+                            </div>
+
+                            {/* Highlight 2 */}
+                            <div className="bg-gray-900/50 p-4 rounded-xl border border-white/5 hover:bg-gray-800 hover:border-gray-700 transition-colors duration-300">
+                                <p className="text-lg font-semibold text-white">6+ Real</p>
+                                <p className="text-xs text-gray-400 mt-1">Projects Built</p>
+                            </div>
+
+                            {/* Highlight 3 */}
+                            <div className="bg-gray-900/50 p-4 rounded-xl border border-white/5 hover:bg-gray-800 hover:border-gray-700 transition-colors duration-300">
+                                <p className="text-lg font-semibold text-emerald-400">Focus on</p>
+                                <p className="text-xs text-gray-400 mt-1">Real-World Solutions</p>
+                            </div>
                         </div>
                     </div>
 

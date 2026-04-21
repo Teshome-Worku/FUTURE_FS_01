@@ -25,8 +25,8 @@ export default function Footer() {
     return (
         <footer className="relative bg-[#0a0f0d] text-white pt-16 pb-8 overflow-hidden">
             {/* Top sleek gradient border */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent opacity-50" />
-            
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-0.5 bg-linear-to-r from-transparent via-emerald-500/50 to-transparent opacity-50" />
+
             {/* Ambient glow center */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-2xl h-48 bg-emerald-500/5 blur-[100px] pointer-events-none" />
 
