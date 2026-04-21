@@ -1,10 +1,12 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import mamiFood from '@/assets/mami-food.png';
 import addisHomes from '@/assets/addis-homes.png';
 import infnova from '@/assets/infnova.png';
 import lemi from '@/assets/lemi.png';
 import urji from '@/assets/urji-photo.png';
 import complaint_tracker from '@/assets/astu-tracker.png'
+
 
 const projects = [
     {
@@ -81,7 +83,7 @@ export default function Projects() {
                     {projects.map((project, index) => (
                         <div
                             key={index}
-                            className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition"
+                            className="bg-gray-900 rounded-xl overflow-hidden shadow-lg hover:scale-[1.02] transition cursor-pointer"
                         >
                             {/* Image */}
                             <Image
@@ -114,18 +116,20 @@ export default function Projects() {
 
                                 {/* Links */}
                                 <div className="flex gap-4">
-                                    <a
+                                    <Link
                                         href={project.live}
                                         className="text-sm text-green-400 hover:underline"
+                                        target='_blank'
                                     >
                                         Live Demo
-                                    </a>
-                                    <a
+                                    </Link>
+                                    <Link
                                         href={project.github}
                                         className="text-sm text-green-400 hover:underline"
+                                        target='_blank'
                                     >
                                         GitHub
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
