@@ -14,12 +14,12 @@ export default function Hero() {
 
             <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
                 {/* Left Side - Text */}
-                <div className="order-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+                <div className="order-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
                     <div className="space-y-3">
                         <p className="text-emerald-400 font-medium tracking-wide">
                             Hello, I&apos;m
                         </p>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-md mx-auto lg:mx-0 break-words">
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-md mx-auto lg:mx-0 ">
                             Teshome Worku
                         </h1>
                         <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light mt-2">
@@ -30,7 +30,7 @@ export default function Hero() {
                         </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto pt-2">
+                    <div className="flex  sm:flex-row items-center gap-4 w-full sm:w-auto pt-2">
                         <Link
                             href="#projects"
                             className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold rounded-xl bg-emerald-500 text-[#0a0f0d] hover:bg-emerald-400 transition-colors"
@@ -54,7 +54,7 @@ export default function Hero() {
                         <div className="absolute -inset-4 bg-emerald-500/20 blur-[60px] opacity-70 rounded-[3rem]" />
 
                         {/* Image Container */}
-                        <div className="relative w-80 h-80 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-3xl overflow-hidden bg-gray-900/40 backdrop-blur-sm border border-white/5 shadow-xl">
+                        <div className="hidden md:flex relative w-80 h-80 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-3xl overflow-hidden bg-gray-900/40 backdrop-blur-sm border border-white/5 shadow-xl">
                             {/* Inner gradient overlay for better blending */}
                             <div className="absolute inset-0 bg-linear-to-tr from-[#0a0f0d]/30 via-transparent to-transparent z-10 pointer-events-none" />
 
