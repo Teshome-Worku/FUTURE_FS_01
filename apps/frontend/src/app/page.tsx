@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Projects from "@/sections/Projects";
+import Skills from "@/sections/Skills";
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#0a0f0d] text-gray-400">
@@ -9,6 +10,7 @@ export default function Home() {
       <Hero />
       <About />
       <Projects />
+      <Skills />
 
 
 
