@@ -15,21 +15,21 @@ export default function About() {
             </div>
 
             <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-20 items-center relative z-10">
-                
+
                 {/* LEFT - IMAGE */}
                 <div className="flex justify-center relative group">
                     <div className="relative isolate z-10">
                         {/* Interactive Glow Behind Image */}
-                        <div className="absolute -inset-2 bg-gradient-to-tr from-green-500 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
-                        
+                        <div className="absolute -inset-2 bg-linear-to-tr from-green-500 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
+
                         <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 shadow-2xl transition-transform duration-700 group-hover:-translate-y-2">
                             <Image
                                 src={aboutImage}
                                 alt="About me"
-                                className="relative w-80 sm:w-96 h-[26rem] sm:h-[30rem] object-cover object-center grayscale-[15%] group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                className="relative w-80 sm:w-96 h-104 sm:h-120 object-cover object-center grayscale-15 group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
                             />
                         </div>
-                        
+
                         {/* Decorative floating badge */}
                         <div className="absolute -bottom-6 -right-6 lg:-right-10 bg-zinc-900/90 backdrop-blur-md border border-white/10 p-5 rounded-2xl shadow-2xl shadow-black/50 transform group-hover:-translate-y-4 group-hover:-rotate-3 transition-all duration-500 z-20">
                             <div className="flex items-center gap-3">
@@ -56,7 +56,7 @@ export default function About() {
                             <span className="text-gray-300 text-xs font-medium uppercase tracking-wider">Discover More</span>
                         </div>
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mt-4">
-                            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">Me</span>
+                            About <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-300">Me</span>
                         </h2>
                     </div>
 
@@ -65,11 +65,11 @@ export default function About() {
                         <p className="text-gray-200 font-medium text-xl leading-snug">
                             I’m a Full Stack Developer focused on building modern, scalable web applications that solve real-world problems.
                         </p>
-                        
+
                         <p>
                             I work with modern technologies like Next.js, Node.js, and MongoDB to create fast, responsive, and user-friendly digital experiences. Turning complex ideas into elegant, intuitive interfaces is my passion.
                         </p>
-                        
+
                         <p>
                             I’m relentlessly focused on improving my skills through hands-on projects and preparing for professional opportunities. I believe in continuous learning to adapt to the ever-evolving tech landscape.
                         </p>
@@ -80,8 +80,8 @@ export default function About() {
                         <p className="text-sm font-semibold text-white mb-5 uppercase tracking-widest text-opacity-80">Core Arsenal</p>
                         <div className="flex flex-wrap gap-3">
                             {skills.map((skill) => (
-                                <span 
-                                    key={skill} 
+                                <span
+                                    key={skill}
                                     className="px-4 py-2 bg-white/5 border border-white/10 rounded-xl text-sm font-medium text-gray-300 hover:text-green-400 hover:border-green-400/50 hover:bg-green-400/10 hover:shadow-[0_0_15px_rgba(74,222,128,0.15)] transition-all duration-300 cursor-default"
                                 >
                                     {skill}
