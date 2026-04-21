@@ -12,35 +12,35 @@ export default function Hero() {
             <div className="absolute top-1/4 -left-64 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
             <div className="absolute bottom-1/4 -right-64 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
 
-            <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+            <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
                 {/* Left Side - Text */}
-                <div className="order-1 lg:order-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8">
-                    <div className="space-y-4">
-                        <p className="text-emerald-400 font-medium tracking-wide pt-4 lg:pt-0">
+                <div className="order-1 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+                    <div className="space-y-3">
+                        <p className="text-emerald-400 font-medium tracking-wide">
                             Hello, I&apos;m
                         </p>
-                        <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight max-w-md mx-auto lg:mx-0 break-words">
                             Teshome Worku
                         </h1>
-                        <h2 className="text-2xl md:text-3xl text-gray-300 font-light">
+                        <h2 className="text-xl md:text-2xl lg:text-3xl text-gray-300 font-light mt-2">
                             Full Stack <span className="font-semibold text-white">Developer</span>
                         </h2>
-                        <p className="text-base md:text-lg text-gray-400 max-w-lg mt-6 leading-relaxed">
+                        <p className="text-base text-gray-400 max-w-md mx-auto lg:mx-0 leading-relaxed mt-6">
                             I design and build scalable, high-performance web applications focused on intuitive user experiences and real-world impact.
                         </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                    <div className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto pt-2">
                         <Link
                             href="#projects"
-                            className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold rounded-xl bg-emerald-500 text-[#0a0f0d] hover:bg-emerald-400 hover:shadow-[0_0_24px_rgba(52,211,153,0.35)] active:scale-[0.98] transition-all duration-300"
+                            className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold rounded-xl bg-emerald-500 text-[#0a0f0d] hover:bg-emerald-400 transition-colors"
                         >
                             View Projects
                         </Link>
 
                         <Link
                             href="#contact"
-                            className="inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold rounded-xl border border-gray-700 bg-gray-900/50 text-gray-300 hover:border-emerald-500 hover:text-emerald-400 hover:bg-emerald-500/5 active:scale-[0.98] transition-all duration-300"
+                            className="w-full sm:w-auto inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold rounded-xl border border-gray-700 bg-gray-900/50 text-gray-300 hover:border-emerald-500 hover:text-emerald-400 transition-colors"
                         >
                             Contact Me
                         </Link>
@@ -48,22 +48,22 @@ export default function Hero() {
                 </div>
 
                 {/* Right Side - Image */}
-                <div className="order-2 lg:order-2 flex justify-center lg:justify-end w-full">
-                    <div className="relative group">
+                <div className="order-2 flex justify-center lg:justify-end w-full">
+                    <div className="relative">
                         {/* Soft background glow */}
-                        <div className="absolute -inset-4 bg-emerald-500/20 blur-[60px] opacity-70 group-hover:opacity-100 transition-opacity duration-700 rounded-[3rem]" />
+                        <div className="absolute -inset-4 bg-emerald-500/20 blur-[60px] opacity-70 rounded-[3rem]" />
 
                         {/* Image Container */}
-                        <div className="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-105 lg:h-105 rounded-3xl overflow-hidden bg-gray-900/40 backdrop-blur-sm border border-white/5 shadow-2xl transition-transform duration-700 group-hover:-translate-y-2 group-hover:rotate-1">
+                        <div className="relative w-80 h-80 sm:w-80 sm:h-80 md:w-96 md:h-96 lg:w-[420px] lg:h-[420px] rounded-3xl overflow-hidden bg-gray-900/40 backdrop-blur-sm border border-white/5 shadow-xl">
                             {/* Inner gradient overlay for better blending */}
-                            <div className="absolute inset-0 bg-linear-to-tr from-[#0a0f0d]/40 via-transparent to-transparent z-10 pointer-events-none" />
+                            <div className="absolute inset-0 bg-linear-to-tr from-[#0a0f0d]/30 via-transparent to-transparent z-10 pointer-events-none" />
 
                             <Image
                                 src={heroDeveloper}
                                 alt="Abstract Developer Illustration"
                                 fill
-                                sizes="(max-width: 768px) 288px, (max-width: 1024px) 320px, 420px"
-                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                                sizes="(max-width: 768px) 320px, (max-width: 1024px) 384px, 420px"
+                                className="object-cover"
                                 priority
                             />
                         </div>
