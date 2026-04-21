@@ -98,6 +98,7 @@ export default function Navbar() {
                         href={hireMeHref}
                         id="navbar-hire-me"
                         title="Whatsapp"
+                        target="_blank"
                         // onClick={() => setActiveLink("#contact")}
                         className="group hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold rounded-lg
               bg-emerald-500 text-[#0a0f0d]
@@ -184,6 +185,7 @@ export default function Navbar() {
                             setActiveLink("#contact");
                             setMobileOpen(false);
                         }}
+                        target="_blank"
                         className="mt-4 flex items-center justify-center gap-2 w-full px-5 py-3 text-sm font-semibold rounded-lg
               bg-emerald-500 text-[#0a0f0d]
               hover:bg-emerald-400 hover:shadow-[0_0_24px_rgba(52,211,153,0.35)]
