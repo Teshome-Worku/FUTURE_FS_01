@@ -104,6 +104,7 @@ export default function Contact() {
                         <Link
                             href="https://github.com/Teshome-Worku"
                             target="_blank"
+                            title="GitHub"
                             className="p-3 rounded-full bg-gray-900/50 border border-white/5 text-gray-400 hover:text-emerald-400 hover:border-emerald-500/30 hover:shadow-[0_0_15px_rgba(52,211,153,0.15)] transition-all duration-300"
                         >
                             <GitHubIcon />
@@ -111,6 +112,7 @@ export default function Contact() {
                         <Link
                             href="https://www.linkedin.com/in/teshome-worku-017834392"
                             target="_blank"
+                            title="LinkedIn"
                             className="p-3 rounded-full bg-gray-900/50 border border-white/5 text-gray-400 hover:text-emerald-400 hover:border-emerald-500/30 hover:shadow-[0_0_15px_rgba(52,211,153,0.15)] transition-all duration-300"
                         >
                             <LinkedInIcon />
