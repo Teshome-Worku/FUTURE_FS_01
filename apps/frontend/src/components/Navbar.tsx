@@ -33,6 +33,33 @@ export default function Navbar() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
+    // Scroll spy for active sections
+    useEffect(() => {
+        const sections = document.querySelectorAll("section[id]");
+
+        const observerOptions = {
+            root: null,
+            rootMargin: "-40% 0px -40% 0px",
+            threshold: 0,
+        };
+
+        const observerCallback = (entries: IntersectionObserverEntry[]) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setActiveLink(`#${entry.target.id}`);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach((section) => observer.observe(section));
+
+        return () => {
+            observer.disconnect();
+        };
+    }, []);
+
     return (
         <nav
             id="main-navbar"
