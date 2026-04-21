@@ -26,7 +26,7 @@ export default function About() {
                             <Image
                                 src={aboutImage}
                                 alt="About me"
-                                className="relative w-80 sm:w-96 h-104 sm:h-120 object-cover object-center grayscale-15 group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
+                                className="relative w-80 sm:w-96 h-104 sm:h-120 object-cover object-top grayscale-15 group-hover:grayscale-0 transition-all duration-700 hover:scale-105"
                             />
                         </div>
 
