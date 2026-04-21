@@ -19,33 +19,34 @@ export default function Contact() {
                     </p>
                     <p>
                         Phone:{" "}
-                        <Link href={"tel:+251955800626"}>
-                            <span className="text-green-400">
+                        <Link href={"tel:+251955800626"} target="_blank">
+                            <span className="text-green-400 cursor-pointer hover:underline transition duration-400">
                                 {phone}
 
                             </span>
                         </Link>
-
 
                     </p>
 
                     {/* Email */}
                     <p className="mb-4">
                         📧 Email:{" "}
-                        <Link href={`mailto:${email}`}>
-                            <span className="text-green-400">
+                        <Link href={`mailto:${email}`} target="_blank">
+                            <span className="text-green-400 cursor-pointer hover:underline transition duration-400  ">
                                 {email}
                             </span>
                         </Link>
-
+                    </p>
+                    <p>
+                        Location:Adama,Ethiopia
                     </p>
 
                     {/* Socials */}
                     <div className="flex gap-4 mt-4">
-                        <Link href="https://github.com/Teshome-Worku" className="text-green-400 hover:underline">
+                        <Link href="https://github.com/Teshome-Worku" className="text-green-400 hover:underline" target="_blank">
                             GitHub
                         </Link>
-                        <Link href="https://www.linkedin.com/in/teshome-worku-017834392" className="text-green-400 hover:underline">
+                        <Link href="https://www.linkedin.com/in/teshome-worku-017834392" className="text-green-400 hover:underline" target="_blank">
                             LinkedIn
                         </Link>
                     </div>
