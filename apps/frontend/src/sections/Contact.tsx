@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -44,7 +45,64 @@ const SendIcon = () => (
     </svg>
 );
 
+const Loader2Icon = ({ className = "" }: { className?: string }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={`w-5 h-5 ml-2 -mr-1 ${className}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-6.219-8.56" />
+    </svg>
+);
+
 export default function Contact() {
+    const [form, setForm] = useState({
+        name: "",
+        email: "",
+        message: "",
+    });
+
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState("");
+
+    const handleChange = (e: any) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+
+    const handleSubmit = async (e: any) => {
+        e.preventDefault();
+
+        setLoading(true);
+        setStatus("");
+
+        try {
+            const res = await fetch("http://localhost:5000/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(form),
+            });
+
+            const data = await res.json();
+
+            if (res.ok) {
+                setStatus("Message sent successfully ✅");
+                setForm({ name: "", email: "", message: "" });
+                setTimeout(() => {
+                    setStatus("");
+                }, 3000)
+            } else {
+                setStatus(data.message || "Something went wrong ❌");
+            }
+        } catch (error) {
+            setStatus("Server error ❌");
+        }
+
+        setLoading(false);
+    };
+
+
     return (
         <section className="relative bg-[#0a0f0d] text-white py-24 px-6 lg:px-10 overflow-hidden" id="contact">
             <div className="absolute top-1/2 left-0 -translate-y-1/2 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none" />
@@ -129,7 +187,9 @@ export default function Contact() {
                     {/* Glow behind form */}
                     <div className="absolute inset-0 bg-emerald-500/10 blur-[50px] rounded-[2rem] pointer-events-none" />
 
-                    <form className="relative bg-gray-900/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl space-y-6">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="relative bg-gray-900/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl space-y-6" >
                         <div className="space-y-1">
                             <h3 className="text-2xl font-bold text-white">Send a message</h3>
                             <p className="text-sm text-gray-400">I&apos;ll get back to you as soon as possible.</p>
@@ -141,6 +201,9 @@ export default function Contact() {
                                 <input
                                     id="name"
                                     type="text"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
                                     placeholder="John Doe"
                                     className="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
                                 />
@@ -151,6 +214,9 @@ export default function Contact() {
                                 <input
                                     id="email"
                                     type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
                                     placeholder="john@example.com"
                                     className="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors"
                                 />
@@ -160,6 +226,9 @@ export default function Contact() {
                                 <label className="block text-sm font-medium text-gray-400 mb-1" htmlFor="message">Your Message</label>
                                 <textarea
                                     id="message"
+                                    name="message"
+                                    value={form.message}
+                                    onChange={handleChange}
                                     placeholder="How can I help you?"
                                     rows={5}
                                     className="w-full px-4 py-3.5 rounded-xl bg-black/50 border border-gray-800 text-white placeholder-gray-600 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-colors resize-none"
@@ -169,11 +238,16 @@ export default function Contact() {
 
                         <button
                             type="submit"
+                            disabled={loading}
                             className="group w-full inline-flex items-center justify-center px-8 py-4 text-sm font-bold tracking-wide rounded-xl bg-emerald-500 text-[#0a0f0d] hover:bg-emerald-400 hover:shadow-[0_0_24px_rgba(52,211,153,0.35)] active:scale-[0.98] transition-all duration-300"
                         >
-                            <span>Send Message</span>
-                            <SendIcon />
+                            <span>{loading ? "Sending..." : "Send Message"}</span>
+                            {loading ? <Loader2Icon className="animate-spin" /> : <SendIcon />}
                         </button>
+                        {status && (
+                            <p className="text-center text-sm text-gray-400">{status}</p>
+                        )}
+
                     </form>
                 </AnimatedSection>
             </div>
