@@ -192,6 +192,12 @@ NEXT_PUBLIC_API_URL=https://future-fs-01-ku9l.onrender.com/
 
 * Admin Dashboard
 
+![admin page](./screenshots/admin.png)
+
+* Admin Login
+
+![admin login](./screenshots/admin-login.png)
+
 ---
 
 ## 📬 Contact
