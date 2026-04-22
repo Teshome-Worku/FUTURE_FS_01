@@ -12,6 +12,9 @@ app.get("/", (req, res) => {
   res.send("Backend is running 🚀");
 });
 
+app.get("/api/projects", (req, res) => {
+  res.send("here is the projects ");
+});
 // Port
 const PORT = 5000;
 

@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
-import aboutImage from "@/assets/profile.jpg"
+import aboutImage from "@/assets/profile.jpg";
+import AnimatedSection from "@/components/AnimatedSection";
 
 export default function About() {
     return (
@@ -13,7 +16,7 @@ export default function About() {
             <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-12 items-center relative z-10">
 
                 {/* LEFT - IMAGE */}
-                <div className="flex justify-center relative group">
+                <AnimatedSection variant="fadeInLeft" className="w-full flex justify-center relative group">
                     <div className="relative isolate z-10">
                         {/* Interactive Glow Behind Image */}
                         <div className="absolute -inset-2 bg-linear-to-tr from-green-500 to-emerald-400 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-700"></div>
@@ -41,23 +44,19 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </AnimatedSection>
 
                 {/* RIGHT - CONTENT */}
-                <div className="space-y-8">
+                <AnimatedSection variant="fadeInRight" delay={0.2} className="space-y-8">
                     {/* Header */}
                     <div className="space-y-3">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
                             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
                             <span className="text-gray-300 text-xs font-medium uppercase tracking-wider">Discover More</span>
                         </div>
-                        <div className="flex justify-center">
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mt-4">
-                                About <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-300">Me</span>
-                            </h2>
-
-                        </div>
-
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mt-4">
+                            About <span className="text-transparent bg-clip-text bg-linear-to-r from-green-400 to-emerald-300">Me</span>
+                        </h2>
                     </div>
 
                     {/* Text content with improved typography */}
@@ -97,8 +96,7 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-
-                </div>
+                </AnimatedSection>
 
             </div>
         </section>

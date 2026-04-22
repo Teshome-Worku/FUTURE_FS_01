@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import AnimatedSection from "@/components/AnimatedSection";
+
 const email = "teshomeworku96@gmail.com";
 const phone = "+251 955 80 0626";
 
@@ -49,7 +53,7 @@ export default function Contact() {
             <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
 
                 {/* LEFT SIDE: Info */}
-                <div className="space-y-10">
+                <AnimatedSection variant="fadeInLeft" className="space-y-10">
                     <div className="space-y-4 text-center lg:text-left">
                         <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
                             Get In <span className="text-emerald-400">Touch</span>
@@ -118,10 +122,10 @@ export default function Contact() {
                             <LinkedInIcon />
                         </Link>
                     </div>
-                </div>
+                </AnimatedSection>
 
                 {/* RIGHT SIDE: Form */}
-                <div className="relative">
+                <AnimatedSection variant="fadeInRight" delay={0.2} className="relative">
                     {/* Glow behind form */}
                     <div className="absolute inset-0 bg-emerald-500/10 blur-[50px] rounded-[2rem] pointer-events-none" />
 
@@ -171,7 +175,7 @@ export default function Contact() {
                             <SendIcon />
                         </button>
                     </form>
-                </div>
+                </AnimatedSection>
             </div>
         </section>
     );

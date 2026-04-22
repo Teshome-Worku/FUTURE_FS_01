@@ -1,3 +1,7 @@
+"use client";
+
+import { AnimatedStaggerContainer, AnimatedStaggerItem } from "@/components/AnimatedSection";
+
 const skills = [
     {
         category: "Frontend",
@@ -56,7 +60,7 @@ const skills = [
 
 export default function Skills() {
     return (
-        <section className="bg-black text-white px-6 py-24 relative overflow-hidden" id="skills">
+        <section className="bg-[#0a0f0d] text-white px-6 py-24 relative overflow-hidden" id="skills">
             {/* Ambient Background Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-500/5 blur-[150px] rounded-full pointer-events-none z-0"></div>
 
@@ -71,39 +75,38 @@ export default function Skills() {
                 </div>
 
                 {/* Skills Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <AnimatedStaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {skills.map((group, index) => (
-                        <div
-                            key={index}
-                            className="bg-zinc-900 border border-white/5 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/10 hover:border-white/10 transition-all duration-300 group cursor-pointer"
-                        >
-                            {/* Category Header */}
-                            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
-                                <div className="p-2 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 group-hover:scale-110 transition-all duration-300">
-                                    {group.icon}
+                        <AnimatedStaggerItem key={index} className="h-full">
+                            <div className="h-full flex flex-col bg-zinc-900/60 border border-white/5 rounded-2xl p-6 shadow-xl hover:shadow-2xl hover:shadow-green-500/10 hover:border-white/10 transition-all duration-300 group cursor-pointer backdrop-blur-md">
+                                {/* Category Header */}
+                                <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
+                                    <div className="p-2 bg-green-500/10 rounded-lg group-hover:bg-green-500/20 group-hover:scale-110 transition-all duration-300">
+                                        {group.icon}
+                                    </div>
+                                    <h3 className="text-lg font-bold text-gray-200">
+                                        {group.category}
+                                    </h3>
                                 </div>
-                                <h3 className="text-lg font-bold text-gray-200">
-                                    {group.category}
-                                </h3>
-                            </div>
 
-                            {/* Skills List */}
-                            <ul className="space-y-4">
-                                {group.items.map((skill, i) => (
-                                    <li key={i} className="flex items-center gap-3 group/item">
-                                        <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center p-1.5 border border-white/5 group-hover/item:border-green-400/30 group-hover/item:scale-110 transition-all">
-                                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                                            <img src={skill.icon} alt={skill.name} className="w-full h-full object-contain" />
-                                        </div>
-                                        <span className="text-gray-400 font-medium group-hover/item:text-white transition-colors">
-                                            {skill.name}
-                                        </span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                                {/* Skills List */}
+                                <ul className="space-y-4 pt-2">
+                                    {group.items.map((skill, i) => (
+                                        <li key={i} className="flex items-center gap-3 group/item">
+                                            <div className="w-8 h-8 rounded-full bg-black flex items-center justify-center p-1.5 border border-white/5 group-hover/item:border-green-400/30 group-hover/item:scale-110 transition-all">
+                                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                                <img src={skill.icon} alt={skill.name} className="w-full h-full object-contain" />
+                                            </div>
+                                            <span className="text-gray-400 font-medium group-hover/item:text-green-400 transition-colors">
+                                                {skill.name}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </AnimatedStaggerItem>
                     ))}
-                </div>
+                </AnimatedStaggerContainer>
 
             </div>
         </section>
