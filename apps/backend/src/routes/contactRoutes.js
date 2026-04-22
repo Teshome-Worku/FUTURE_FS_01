@@ -8,11 +8,33 @@ const protect=require("../middleware/authMiddleware")
 // POST /api/contact
 router.post("/", async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    let { name, email, message } = req.body;
 
     // 🔹 Basic validation
     if (!name || !email || !message) {
       return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // Trim whitespace to prevent empty space bypassing length checks
+    name = name.trim();
+    email = email.trim();
+    message = message.trim();
+
+    if(name.length < 3){
+      return res.status(400).json({ message: "Name must be at least 3 characters long" });
+    }
+    if(name.length > 30){
+      return res.status(400).json({ message: "Name must be at most 30 characters long" });
+    }
+
+    // 🔹 Email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Please provide a valid email address" });
+    }
+
+    if(message.length < 5){
+      return res.status(400).json({ message: "Message must be at least 5 characters long" });
     }
 
     // 🔹 Save to database

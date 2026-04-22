@@ -61,6 +61,7 @@ export default function Contact() {
 
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState("");
+    const [error, setError] = useState("");
 
     const handleChange = (e: any) => {
         setForm({
@@ -94,10 +95,16 @@ export default function Contact() {
                     setStatus("");
                 }, 3000)
             } else {
-                setStatus(data.message || "Something went wrong ❌");
+                setError(data.message || "Something went wrong ❌");
+                setTimeout(() => {
+                    setError("");
+                }, 3000)
             }
         } catch (error) {
-            setStatus("Server error ❌");
+            setError("Server error ❌");
+            setTimeout(() => {
+                setError("");
+            }, 3000)
         }
 
         setLoading(false);
@@ -193,8 +200,15 @@ export default function Contact() {
                         className="relative bg-gray-900/40 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl space-y-6" >
                         <div className="space-y-1">
                             <h3 className="text-2xl font-bold text-white">Send a message</h3>
+
                             <p className="text-sm text-gray-400">I&apos;ll get back to you as soon as possible.</p>
                         </div>
+                        {status && (
+                            <p className="text-center text-sm text-green-400">{status}</p>
+                        )}
+                        {error && (
+                            <p className="text-center text-sm text-red-400">{error}</p>
+                        )}
 
                         <div className="space-y-4 pt-4">
                             <div>
@@ -203,6 +217,7 @@ export default function Contact() {
                                     id="name"
                                     type="text"
                                     name="name"
+                                    required
                                     value={form.name}
                                     onChange={handleChange}
                                     placeholder="John Doe"
@@ -216,6 +231,7 @@ export default function Contact() {
                                     id="email"
                                     type="email"
                                     name="email"
+                                    required
                                     value={form.email}
                                     onChange={handleChange}
                                     placeholder="john@example.com"
@@ -229,6 +245,7 @@ export default function Contact() {
                                     id="message"
                                     name="message"
                                     value={form.message}
+                                    required
                                     onChange={handleChange}
                                     placeholder="How can I help you?"
                                     rows={5}
@@ -245,9 +262,7 @@ export default function Contact() {
                             <span>{loading ? "Sending..." : "Send Message"}</span>
                             {loading ? <Loader2Icon className="animate-spin" /> : <SendIcon />}
                         </button>
-                        {status && (
-                            <p className="text-center text-sm text-gray-400">{status}</p>
-                        )}
+
 
                     </form>
                 </AnimatedSection>
