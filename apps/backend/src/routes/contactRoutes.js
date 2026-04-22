@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Contact = require("../models/contact");
+const sendEmail=require('../utils/sendEmail')
 
 router.post("/", async (req, res) => {
   try {
@@ -17,13 +18,16 @@ router.post("/", async (req, res) => {
       email,
       message,
     });
-
+    //save to database
     await newContact.save();
 
+    //send email
+    await sendEmail({name,email,message});
     res.status(201).json({
       message: "Message sent successfully",
+      
     });
-    console.log(newContact);
+
   } catch (error) {
     console.error(error);
     res.status(500).json({
