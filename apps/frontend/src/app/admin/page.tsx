@@ -1,17 +1,32 @@
 "use client";
 import { useEffect, useState } from "react";
-const API_URL = "http://localhost:5000"
+import { useRouter } from "next/navigation";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AdminPage() {
     const [messages, setMessages] = useState([]);
+    const token = localStorage.getItem("token");
+    const router = useRouter();
 
     useEffect(() => {
+        if (!token) {
+            router.push("/admin/login");
+            return;
+        }
         fetchMessages();
     }, []);
 
     const fetchMessages = async () => {
         try {
-            const res = await fetch(`${API_URL}/api/contact`);
+            const res = await fetch(`${API_URL}/api/contact`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            if (res.status === 401) {
+                router.push("/admin/login");
+                return;
+            }
             const data = await res.json();
             setMessages(data);
         } catch (error) {
