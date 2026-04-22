@@ -6,11 +6,12 @@ A modern, full-stack personal portfolio website built to showcase my work, skill
 
 ## 🚀 Live Demo
 
-* 🌍 Frontend (Vercel): live demo link
-* 🔗 Backend API (Render): https://future-fs-01-ku9l.onrender.com/
-
+* 🌍 Frontend (Vercel): [live demo link](https://tesheport.vercel.app/)
+* 🔗 Backend API (Render): [Live backend](https://future-fs-01-ku9l.onrender.com/)
+* Admin login creds: 
+    * [EMAIL_ADDRESS] / [PASSWORD]
 ---
-
+    
 ## 📌 About The Project
 
 This is not just a static portfolio — it is a **full-stack application** designed to represent me professionally to recruiters and clients.

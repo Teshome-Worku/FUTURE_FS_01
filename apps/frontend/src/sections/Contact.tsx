@@ -63,6 +63,7 @@ export default function Contact() {
     const [status, setStatus] = useState("");
     const [error, setError] = useState("");
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleChange = (e: any) => {
         setForm({
             ...form,
@@ -71,6 +72,7 @@ export default function Contact() {
     };
 
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
