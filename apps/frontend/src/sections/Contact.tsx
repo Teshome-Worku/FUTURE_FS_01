@@ -193,7 +193,7 @@ export default function Contact() {
                 {/* RIGHT SIDE: Form */}
                 <AnimatedSection variant="fadeInRight" delay={0.2} className="relative">
                     {/* Glow behind form */}
-                    <div className="absolute inset-0 bg-emerald-500/10 blur-[50px] rounded-[2rem] pointer-events-none" />
+                    <div className="absolute inset-0 bg-emerald-500/10 blur-[50px] rounded-4xl pointer-events-none" />
 
                     <form
                         onSubmit={handleSubmit}
