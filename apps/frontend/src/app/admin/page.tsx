@@ -6,19 +6,19 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Simple inline SVGs for layout icons to avoid adding unnecessary dependencies
 const LayoutDashboardIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="7" height="9" x="3" y="3" rx="1" /><rect width="7" height="5" x="14" y="3" rx="1" /><rect width="7" height="9" x="14" y="12" rx="1" /><rect width="7" height="5" x="3" y="16" rx="1" /></svg>
 );
 const MessageSquareIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>
 );
 const UserIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" /></svg>
 );
 const LogOutIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" /><polyline points="16 17 21 12 16 7" /><line x1="21" x2="9" y1="12" y2="12" /></svg>
 );
 const Trash2Icon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
 );
 
 export default function AdminPage() {
@@ -72,7 +72,7 @@ export default function AdminPage() {
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen bg-[#0a0f0d] text-white">
-            
+
             {/* SIDEBAR (Left Panel) */}
             <aside className="w-full md:w-64 bg-gray-900 border-r border-white/5 flex flex-col md:sticky md:top-0 md:h-screen z-20 shadow-2xl">
                 <div className="p-6 border-b border-white/5">
@@ -80,17 +80,17 @@ export default function AdminPage() {
                         Admin<span className="text-emerald-400">Panel</span>
                     </h2>
                 </div>
-                
+
                 <nav className="flex-1 p-4 flex flex-col gap-2 overflow-y-auto">
-                    <button 
+                    <button
                         onClick={() => setActiveTab("overview")}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'overview' ? 'bg-emerald-500/10 text-emerald-400 shadow-sm' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
                     >
                         <LayoutDashboardIcon />
                         <span className="font-medium">Overview</span>
                     </button>
-                    
-                    <button 
+
+                    <button
                         onClick={() => setActiveTab("messages")}
                         className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'messages' ? 'bg-emerald-500/10 text-emerald-400 shadow-sm' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
                     >
@@ -104,8 +104,8 @@ export default function AdminPage() {
                             </span>
                         )}
                     </button>
-                    
-                    <button 
+
+                    <button
                         onClick={() => setActiveTab("profile")}
                         className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'profile' ? 'bg-emerald-500/10 text-emerald-400 shadow-sm' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
                     >
@@ -115,7 +115,7 @@ export default function AdminPage() {
                 </nav>
 
                 <div className="p-4 border-t border-white/5">
-                    <button 
+                    <button
                         onClick={handleLogout}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-colors"
                     >
@@ -128,7 +128,7 @@ export default function AdminPage() {
             {/* MAIN CONTENT AREA (Right Panel) */}
             <main className="flex-1 p-6 md:p-10 overflow-y-auto md:h-screen">
                 <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
-                    
+
                     {/* Header */}
                     <header className="flex justify-between items-end border-b border-white/5 pb-6">
                         <div>
@@ -148,7 +148,7 @@ export default function AdminPage() {
                                     <MessageSquareIcon />
                                 </div>
                             </div>
-                            
+
                             {/* Card 2 */}
                             <div className="bg-gray-900 border border-emerald-500/20 p-6 rounded-2xl flex flex-col justify-between shadow-lg relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all"></div>
@@ -196,7 +196,7 @@ export default function AdminPage() {
                                                         {new Date(msg.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
                                                     </td>
                                                     <td className="px-6 py-5 whitespace-nowrap text-right">
-                                                        <button 
+                                                        <button
                                                             className="text-gray-600 hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-400/10 inline-flex items-center justify-center"
                                                             title="Delete Message (UI Only Mockup)"
                                                         >
@@ -228,7 +228,7 @@ export default function AdminPage() {
                                         </button>
                                     </div>
                                 </div>
-                                
+
                                 <hr className="border-white/5" />
 
                                 <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
