@@ -1,34 +1,55 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
+// Simple inline SVGs for layout icons to avoid adding unnecessary dependencies
+const LayoutDashboardIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+);
+const MessageSquareIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+);
+const UserIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+);
+const LogOutIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg>
+);
+const Trash2Icon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+);
+
 export default function AdminPage() {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<any[]>([]);
     const [token, setToken] = useState<string | null>(null);
+    const [activeTab, setActiveTab] = useState("overview"); // overview, messages, profile
     const router = useRouter();
 
     useEffect(() => {
+        // localStorage is safely kept inside useEffect so it only runs in the browser,
+        // which permanently resolves the Next.js Vercel prerendering ReferenceError.
         const storedToken = localStorage.getItem("token");
 
         if (!storedToken) {
             router.push("/admin/login");
             return;
-        }
-        else {
+        } else {
             setToken(storedToken);
+            fetchMessages(storedToken);
         }
-        fetchMessages();
-    }, []);
+    }, [router]);
 
-    const fetchMessages = async () => {
+    const fetchMessages = async (currentToken: string) => {
         try {
             const res = await fetch(`${API_URL}/api/contact`, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${currentToken}`
                 }
             });
             if (res.status === 401) {
+                localStorage.removeItem("token");
                 router.push("/admin/login");
                 return;
             }
@@ -39,27 +60,202 @@ export default function AdminPage() {
         }
     };
 
-    return (
-        <div className="min-h-screen bg-black text-white p-6">
-            <h1 className="text-3xl font-bold mb-6">
-                Admin Dashboard
-            </h1>
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        router.push("/admin/login");
+    };
 
-            <div className="space-y-4">
-                {messages.map((msg: any, index) => (
-                    <div
-                        key={index}
-                        className="bg-gray-900 p-4 rounded-lg"
+    // Return a blank loading screen briefly while we confirm the browser token
+    if (!token) return <div className="min-h-screen bg-[#0a0f0d] flex items-center justify-center text-white">Authenticating...</div>;
+
+    const totalCount = messages.length;
+
+    return (
+        <div className="flex flex-col md:flex-row min-h-screen bg-[#0a0f0d] text-white">
+            
+            {/* SIDEBAR (Left Panel) */}
+            <aside className="w-full md:w-64 bg-gray-900 border-r border-white/5 flex flex-col md:sticky md:top-0 md:h-screen z-20 shadow-2xl">
+                <div className="p-6 border-b border-white/5">
+                    <h2 className="text-2xl font-bold tracking-tight text-white">
+                        Admin<span className="text-emerald-400">Panel</span>
+                    </h2>
+                </div>
+                
+                <nav className="flex-1 p-4 flex flex-col gap-2 overflow-y-auto">
+                    <button 
+                        onClick={() => setActiveTab("overview")}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'overview' ? 'bg-emerald-500/10 text-emerald-400 shadow-sm' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
                     >
-                        <p><strong>Name:</strong> {msg.name}</p>
-                        <p><strong>Email:</strong> {msg.email}</p>
-                        <p><strong>Message:</strong> {msg.message}</p>
-                        <p className="text-sm text-gray-400">
-                            {new Date(msg.createdAt).toLocaleString()}
-                        </p>
-                    </div>
-                ))}
-            </div>
+                        <LayoutDashboardIcon />
+                        <span className="font-medium">Overview</span>
+                    </button>
+                    
+                    <button 
+                        onClick={() => setActiveTab("messages")}
+                        className={`flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'messages' ? 'bg-emerald-500/10 text-emerald-400 shadow-sm' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
+                    >
+                        <div className="flex items-center gap-3">
+                            <MessageSquareIcon />
+                            <span className="font-medium">Messages</span>
+                        </div>
+                        {totalCount > 0 && (
+                            <span className="bg-emerald-500 text-[#0a0f0d] text-xs font-bold px-2 py-0.5 rounded-full">
+                                {totalCount}
+                            </span>
+                        )}
+                    </button>
+                    
+                    <button 
+                        onClick={() => setActiveTab("profile")}
+                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-300 ${activeTab === 'profile' ? 'bg-emerald-500/10 text-emerald-400 shadow-sm' : 'text-gray-400 hover:bg-gray-800 hover:text-white'}`}
+                    >
+                        <UserIcon />
+                        <span className="font-medium">Profile</span>
+                    </button>
+                </nav>
+
+                <div className="p-4 border-t border-white/5">
+                    <button 
+                        onClick={handleLogout}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-red-500/10 hover:text-red-400 transition-colors"
+                    >
+                        <LogOutIcon />
+                        <span className="font-medium">Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+            {/* MAIN CONTENT AREA (Right Panel) */}
+            <main className="flex-1 p-6 md:p-10 overflow-y-auto md:h-screen">
+                <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
+                    
+                    {/* Header */}
+                    <header className="flex justify-between items-end border-b border-white/5 pb-6">
+                        <div>
+                            <h1 className="text-3xl font-extrabold tracking-tight capitalize">{activeTab}</h1>
+                            <p className="text-gray-400 text-sm mt-1">Manage your portfolio data and application settings.</p>
+                        </div>
+                    </header>
+
+                    {/* VIEW: OVERVIEW */}
+                    {activeTab === "overview" && (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                            {/* Card 1 */}
+                            <div className="bg-gray-900 border border-white/5 p-6 rounded-2xl flex flex-col justify-between shadow-lg hover:border-emerald-500/20 transition-colors">
+                                <h3 className="text-gray-400 font-medium mb-4">Total Messages</h3>
+                                <div className="flex items-end justify-between">
+                                    <span className="text-5xl font-bold text-white">{totalCount}</span>
+                                    <MessageSquareIcon />
+                                </div>
+                            </div>
+                            
+                            {/* Card 2 */}
+                            <div className="bg-gray-900 border border-emerald-500/20 p-6 rounded-2xl flex flex-col justify-between shadow-lg relative overflow-hidden group">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all"></div>
+                                <h3 className="text-emerald-400 font-medium mb-4 relative z-10">Unread Action</h3>
+                                <div className="flex items-end justify-between relative z-10">
+                                    <span className="text-5xl font-bold text-white">{totalCount}</span>
+                                    <span className="text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-md text-xs font-semibold">Attention Needed</span>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {/* VIEW: MESSAGES */}
+                    {activeTab === "messages" && (
+                        <div className="bg-gray-900 border border-white/5 rounded-2xl shadow-xl overflow-hidden">
+                            {messages.length === 0 ? (
+                                <div className="p-16 text-center text-gray-500 flex flex-col items-center">
+                                    <MessageSquareIcon />
+                                    <p className="mt-4 font-medium">No messages found.</p>
+                                    <p className="text-sm mt-1">When users contact you, messages will appear here.</p>
+                                </div>
+                            ) : (
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-left border-collapse">
+                                        <thead>
+                                            <tr className="bg-black/40 border-b border-white/5 text-gray-400 text-xs uppercase tracking-widest">
+                                                <th className="px-6 py-5 font-semibold">Name</th>
+                                                <th className="px-6 py-5 font-semibold">Email</th>
+                                                <th className="px-6 py-5 font-semibold min-w-[300px]">Message</th>
+                                                <th className="px-6 py-5 font-semibold">Date</th>
+                                                <th className="px-6 py-5 font-semibold text-right">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-white/5">
+                                            {messages.map((msg: any, index) => (
+                                                <tr key={index} className="hover:bg-white/[0.02] transition-colors group">
+                                                    <td className="px-6 py-5 whitespace-nowrap font-medium text-gray-200">{msg.name}</td>
+                                                    <td className="px-6 py-5 whitespace-nowrap text-gray-400 text-sm">
+                                                        <a href={`mailto:${msg.email}`} className="hover:text-emerald-400 transition-colors">{msg.email}</a>
+                                                    </td>
+                                                    <td className="px-6 py-5 text-gray-300 text-sm leading-relaxed">
+                                                        <p className="line-clamp-2">{msg.message}</p>
+                                                    </td>
+                                                    <td className="px-6 py-5 whitespace-nowrap text-gray-500 text-sm">
+                                                        {new Date(msg.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                                                    </td>
+                                                    <td className="px-6 py-5 whitespace-nowrap text-right">
+                                                        <button 
+                                                            className="text-gray-600 hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-400/10 inline-flex items-center justify-center"
+                                                            title="Delete Message (UI Only Mockup)"
+                                                        >
+                                                            <Trash2Icon />
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* VIEW: PROFILE */}
+                    {activeTab === "profile" && (
+                        <div className="max-w-2xl">
+                            <div className="bg-gray-900 border border-white/5 rounded-2xl shadow-xl overflow-hidden p-8 space-y-8">
+                                <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6">
+                                    <div className="w-24 h-24 rounded-full bg-emerald-500/20 border-2 border-emerald-500/50 flex items-center justify-center text-emerald-400 text-3xl font-bold shadow-lg shadow-emerald-500/10">
+                                        TW
+                                    </div>
+                                    <div className="text-center sm:text-left">
+                                        <h3 className="text-xl font-bold">Admin Account</h3>
+                                        <p className="text-gray-400 text-sm mt-1">Manage your account and security settings.</p>
+                                        <button className="mt-4 text-sm px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-white font-medium transition-colors">
+                                            Change Avatar (UI Demo)
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <hr className="border-white/5" />
+
+                                <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-400 mb-1.5">Full Name</label>
+                                        <input type="text" defaultValue="Teshome Worku" className="w-full bg-black/50 border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-400 mb-1.5">Email Address</label>
+                                        <input type="email" defaultValue="teshomeworku96@gmail.com" disabled className="w-full bg-black/50 border border-gray-800 rounded-xl px-4 py-3.5 text-gray-600 cursor-not-allowed" />
+                                        <p className="text-xs text-gray-500 mt-2">Email address cannot be changed for this account.</p>
+                                    </div>
+                                    <div>
+                                        <label className="block text-sm font-medium text-gray-400 mb-1.5">New Password</label>
+                                        <input type="password" placeholder="••••••••" className="w-full bg-black/50 border border-gray-800 rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all" />
+                                    </div>
+                                    <div className="pt-4">
+                                        <button type="button" className="px-6 py-3.5 bg-emerald-500 text-[#0a0f0d] font-bold rounded-xl hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all active:scale-95">
+                                            Save Settings
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </main>
         </div>
     );
 }
