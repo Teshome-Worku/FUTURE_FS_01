@@ -103,7 +103,7 @@ export default function Contact() {
                 }, 3000)
             }
         } catch (error) {
-            setError("Server error ❌");
+            setError(error instanceof Error ? error.message : "Something went wrong ❌");
             setTimeout(() => {
                 setError("");
             }, 3000)
