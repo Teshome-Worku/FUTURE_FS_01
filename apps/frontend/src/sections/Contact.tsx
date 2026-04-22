@@ -6,7 +6,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 
 const email = "teshomeworku96@gmail.com";
 const phone = "+251 955 80 0626";
-const API_URL = "http://localhost:5000";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // SVGs
 const PhoneIcon = () => (

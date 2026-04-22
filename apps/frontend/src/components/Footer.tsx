@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 const email = "teshomeworku96@gmail.com";
 
