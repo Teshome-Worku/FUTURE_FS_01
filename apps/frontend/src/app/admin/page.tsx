@@ -5,13 +5,18 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export default function AdminPage() {
     const [messages, setMessages] = useState([]);
-    const token = localStorage.getItem("token");
+    const [token, setToken] = useState<string | null>(null);
     const router = useRouter();
 
     useEffect(() => {
-        if (!token) {
+        const storedToken = localStorage.getItem("token");
+
+        if (!storedToken) {
             router.push("/admin/login");
             return;
+        }
+        else {
+            setToken(storedToken);
         }
         fetchMessages();
     }, []);
