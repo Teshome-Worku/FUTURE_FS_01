@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -27,20 +28,6 @@ export default function AdminPage() {
     const [activeTab, setActiveTab] = useState("overview"); // overview, messages, profile
     const router = useRouter();
 
-    useEffect(() => {
-        // localStorage is safely kept inside useEffect so it only runs in the browser,
-        // which permanently resolves the Next.js Vercel prerendering ReferenceError.
-        const storedToken = localStorage.getItem("token");
-
-        if (!storedToken) {
-            router.push("/admin/login");
-            return;
-        } else {
-            setToken(storedToken);
-            fetchMessages(storedToken);
-        }
-    }, [router]);
-
     const fetchMessages = async (currentToken: string) => {
         try {
             const res = await fetch(`${API_URL}/api/contact`, {
@@ -55,10 +42,28 @@ export default function AdminPage() {
             }
             const data = await res.json();
             setMessages(data);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             console.error("Error fetching messages");
         }
     };
+
+    useEffect(() => {
+
+        const storedToken = localStorage.getItem("token");
+
+        if (!storedToken) {
+            router.push("/admin/login");
+            return;
+        } else {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setToken(storedToken);
+            fetchMessages(storedToken);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -177,14 +182,14 @@ export default function AdminPage() {
                                             <tr className="bg-black/40 border-b border-white/5 text-gray-400 text-xs uppercase tracking-widest">
                                                 <th className="px-6 py-5 font-semibold">Name</th>
                                                 <th className="px-6 py-5 font-semibold">Email</th>
-                                                <th className="px-6 py-5 font-semibold min-w-[300px]">Message</th>
+                                                <th className="px-6 py-5 font-semibold min-w-75">Message</th>
                                                 <th className="px-6 py-5 font-semibold">Date</th>
                                                 <th className="px-6 py-5 font-semibold text-right">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-white/5">
                                             {messages.map((msg: any, index) => (
-                                                <tr key={index} className="hover:bg-white/[0.02] transition-colors group">
+                                                <tr key={index} className="hover:bg-white/2 transition-colors group">
                                                     <td className="px-6 py-5 whitespace-nowrap font-medium text-gray-200">{msg.name}</td>
                                                     <td className="px-6 py-5 whitespace-nowrap text-gray-400 text-sm">
                                                         <a href={`mailto:${msg.email}`} className="hover:text-emerald-400 transition-colors">{msg.email}</a>
