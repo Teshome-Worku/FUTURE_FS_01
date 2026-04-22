@@ -3,6 +3,8 @@ const router = express.Router();
 const Contact = require("../models/contact");
 const sendEmail=require('../utils/sendEmail')
 
+
+// POST /api/contact
 router.post("/", async (req, res) => {
   try {
     const { name, email, message } = req.body;
@@ -33,6 +35,16 @@ router.post("/", async (req, res) => {
     res.status(500).json({
       message: "Server error",
     });
+  }
+});
+// GET /api/contact
+router.get("/", async (req, res) => {
+  try {
+    const contacts = await Contact.find().sort({ createdAt: -1 });
+
+    res.status(200).json(contacts);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
   }
 });
 
