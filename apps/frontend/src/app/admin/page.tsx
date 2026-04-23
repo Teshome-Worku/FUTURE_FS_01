@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -192,7 +193,7 @@ export default function AdminPage() {
                                                 <tr key={index} className="hover:bg-white/2 transition-colors group">
                                                     <td className="px-6 py-5 whitespace-nowrap font-medium text-gray-200">{msg.name}</td>
                                                     <td className="px-6 py-5 whitespace-nowrap text-gray-400 text-sm">
-                                                        <a href={`mailto:${msg.email}`} className="hover:text-emerald-400 transition-colors">{msg.email}</a>
+                                                        <Link href={`mailto:${msg.email}`} className="hover:text-emerald-400 transition-colors">{msg.email}</Link>
                                                     </td>
                                                     <td className="px-6 py-5 text-gray-300 text-sm leading-relaxed">
                                                         <p className="line-clamp-2">{msg.message}</p>
