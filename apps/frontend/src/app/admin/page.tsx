@@ -248,7 +248,7 @@ export default function AdminPage() {
                                                     </td>
                                                     <td className="px-6 py-5 whitespace-nowrap text-right">
                                                         <button
-                                                            className="text-gray-600 hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-400/10 inline-flex items-center justify-center"
+                                                            className="text-gray-600 cursor-pointer hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-400/10 inline-flex items-center justify-center"
                                                             title="Delete Message"
                                                             onClick={() => handleDelete(msg._id)}
                                                         >
