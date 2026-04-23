@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import DeletePopup from "../../components/deletePopup";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -27,6 +28,11 @@ export default function AdminPage() {
     const [messages, setMessages] = useState<any[]>([]);
     const [token, setToken] = useState<string | null>(null);
     const [activeTab, setActiveTab] = useState("overview"); // overview, messages, profile
+    const [deletePopup, setDeletePopup] = useState<{ isOpen: boolean; id: string | null }>({
+        isOpen: false,
+        id: null,
+    });
+    const [isDeleting, setIsDeleting] = useState(false);
     const router = useRouter();
 
     const fetchMessages = async (currentToken: string) => {
@@ -69,6 +75,45 @@ export default function AdminPage() {
     const handleLogout = () => {
         localStorage.removeItem("token");
         router.push("/admin/login");
+    };
+
+    const handleDelete = async (id: any) => {
+        setDeletePopup({ isOpen: true, id });
+    };
+
+    const confirmDelete = async () => {
+        if (!deletePopup.id || !token) return;
+
+        setIsDeleting(true);
+        try {
+            const res = await fetch(
+                `${process.env.NEXT_PUBLIC_API_URL}/api/contact/${deletePopup.id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+
+            if (res.ok) {
+                // Remove from UI instantly
+                setMessages((prev) => prev.filter((msg) => msg._id !== deletePopup.id));
+                console.log("Message deleted successfully");
+            } else {
+                alert("Failed to delete message");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Something went wrong");
+        } finally {
+            setIsDeleting(false);
+            setDeletePopup({ isOpen: false, id: null });
+        }
+    };
+
+    const cancelDelete = () => {
+        setDeletePopup({ isOpen: false, id: null });
     };
 
     // Return a blank loading screen briefly while we confirm the browser token
@@ -204,7 +249,8 @@ export default function AdminPage() {
                                                     <td className="px-6 py-5 whitespace-nowrap text-right">
                                                         <button
                                                             className="text-gray-600 hover:text-red-400 transition-colors p-2 rounded-lg hover:bg-red-400/10 inline-flex items-center justify-center"
-                                                            title="Delete Message (UI Only Mockup)"
+                                                            title="Delete Message"
+                                                            onClick={() => handleDelete(msg._id)}
                                                         >
                                                             <Trash2Icon />
                                                         </button>
@@ -262,6 +308,17 @@ export default function AdminPage() {
                     )}
                 </div>
             </main>
+
+            {/* Delete Confirmation Popup */}
+            <DeletePopup
+                isOpen={deletePopup.isOpen}
+                onClose={cancelDelete}
+                onConfirm={confirmDelete}
+                title="Delete Message"
+                message="Are you sure you want to delete this contact message? This action cannot be undone."
+                confirmText="Delete Message"
+                isLoading={isDeleting}
+            />
         </div>
     );
 }
