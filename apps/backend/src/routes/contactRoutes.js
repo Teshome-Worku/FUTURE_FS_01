@@ -71,4 +71,18 @@ router.get("/",protect, async (req, res) => {
   }
 });
 
+// DELETE /api/contact/:id
+router.delete("/:id",protect, async (req, res) => {
+  try {
+    const contact = await Contact.findByIdAndDelete(req.params.id);
+    if (!contact) {
+      return res.status(404).json({ message: "Contact not found" });
+    }
+    res.status(200).json({ message: "Message deleted successfully" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message:error});
+  }
+});
+
 module.exports = router;

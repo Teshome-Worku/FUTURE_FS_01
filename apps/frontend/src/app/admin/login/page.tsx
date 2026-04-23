@@ -45,8 +45,8 @@ export default function Login() {
             } else {
                 setError(data.message || "Invalid credentials. Please try again.");
             }
-        } catch (err) {
-            setError("Server connection failed. Please check your network.");
+        } catch (error) {
+            setError(error instanceof Error ? error.message : "An unexpected error occurred. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -54,13 +54,13 @@ export default function Login() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#0a0f0d] text-white p-6 relative overflow-hidden">
-            
+
             {/* Ambient Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none z-0"></div>
 
             <div className="w-full max-w-md relative z-10">
                 <form onSubmit={handleLogin} className="bg-gray-900/50 backdrop-blur-xl p-8 sm:p-10 rounded-3xl border border-white/5 shadow-2xl space-y-8">
-                    
+
                     <div className="text-center space-y-2">
                         <div className="w-16 h-16 bg-emerald-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-500/20 shadow-[0_0_20px_rgba(52,211,153,0.15)]">
                             <LockIcon />
@@ -103,8 +103,8 @@ export default function Login() {
                         </div>
                     </div>
 
-                    <button 
-                        type="submit" 
+                    <button
+                        type="submit"
                         disabled={loading}
                         className="group w-full flex items-center justify-center gap-2 bg-emerald-500 text-[#0a0f0d] py-4 rounded-xl font-bold text-base hover:bg-emerald-400 hover:shadow-[0_0_20px_rgba(52,211,153,0.3)] transition-all duration-300 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
                     >
@@ -117,7 +117,7 @@ export default function Login() {
                             <span>Secure Login</span>
                         )}
                     </button>
-                    
+
                     <div className="text-center pt-2">
                         <p className="text-xs text-gray-500">Restricted access. Authorized personnel only.</p>
                     </div>
